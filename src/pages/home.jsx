@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Screams from "../components/Screams";
+import Profile from "../components/Profile";
 
 class Home extends Component {
   state = {
@@ -28,12 +29,12 @@ class Home extends Component {
       <p>Loading datas...</p>
     );
     return (
-      <Grid container spacing={16}>
-        <Grid item sm={8} xs={12}>
+      <Grid container spacing={16} justifyContent="space-evenly">
+        <Grid item sm={7} xs={12}>
           {screamsData}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p>Loading Profile...</p>
+          <Profile />
         </Grid>
       </Grid>
     );

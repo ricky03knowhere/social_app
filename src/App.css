@@ -16,7 +16,9 @@ body {
 .navbar {
   margin-left: auto;
 }
-
+.navbar svg {
+  color: #fff;
+}
 .navbar a {
   margin-left: 2em;
 }

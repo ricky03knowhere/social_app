@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -8,12 +8,17 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
 
-import LocationOn from "@material-ui/icons//LocationOn";
-import LinkIcon from "@material-ui/icons//Link";
-import CalendarToday from "@material-ui/icons//CalendarToday";
+import LocationOn from "@material-ui/icons/LocationOn";
+import LinkIcon from "@material-ui/icons/Link";
+import CalendarToday from "@material-ui/icons/CalendarToday";
+import EditIcon from "@material-ui/icons/Edit";
+import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
+import { logoutUser, uploadImage } from "../redux/actions/userActions";
+
+import MyButton from "../utils/MyButton";
+import EditDetails from "./EditDetails";
 import { connect } from "react-redux";
-import { Fragment } from "react";
 import dayjs from "dayjs";
 
 const styles = (theme) => ({
@@ -65,6 +70,24 @@ const styles = (theme) => ({
 });
 
 class Profile extends Component {
+  handleImageChange = (event) => {
+    const image = event.target.files[0];
+
+    //Send to server
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    this.props.uploadImage(formData);
+  };
+
+  handleEditPicture = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+
+  handleLogout = () => {
+    this.props.logoutUser();
+  };
+
   render() {
     const {
       classes,
@@ -81,6 +104,19 @@ class Profile extends Component {
           <div className={classes.profile}>
             <div className="image-wrapper">
               <img src={imageUrl} alt="profile" className="profile-image" />
+              <input
+                type="file"
+                id="imageInput"
+                onChange={this.handleImageChange}
+                hidden
+              />
+              <MyButton
+                tip="Change profile picture"
+                onClick={this.handleEditPicture}
+                btnClassName="button"
+              >
+                <EditIcon color="primary"></EditIcon>
+              </MyButton>
             </div>
             <hr />
             <div className="profile-detail" justifyContent="center">
@@ -92,7 +128,6 @@ class Profile extends Component {
               >
                 <h3 style={{ textAlign: "center" }}>@{handle}</h3>
               </MuiLink>
-
               {bio && (
                 <Typography
                   variant="body2"
@@ -103,14 +138,12 @@ class Profile extends Component {
                 </Typography>
               )}
               <hr />
-
               {location && (
                 <Fragment>
                   <LocationOn color="primary" /> <span>{location}</span>
                 </Fragment>
               )}
               <hr />
-
               {website && (
                 <Fragment>
                   <LinkIcon color="primary" />
@@ -121,12 +154,20 @@ class Profile extends Component {
                   <hr />
                 </Fragment>
               )}
-
-              <CalendarToday color="primary" />
-              {" "}
+              <CalendarToday color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
           </div>
+
+          <MyButton
+            tip="Logout"
+            onClick={this.handleLogout}
+            btnClassName="button"
+          >
+            <KeyboardReturn color="primary"></KeyboardReturn>
+          </MyButton>
+
+          <EditDetails />
         </Paper>
       ) : (
         <Paper className={classes.paper}>
@@ -164,9 +205,16 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
+const mapActionToProps = { logoutUser, uploadImage };
+
 Profile.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Profile));
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(styles)(Profile));

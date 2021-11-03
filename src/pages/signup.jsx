@@ -36,11 +36,6 @@ class Signup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("hi!");
-
-    // this.setState({
-    //   loading: true,
-    // });
 
     const newUserData = {
       email: this.state.email,
@@ -49,22 +44,6 @@ class Signup extends Component {
       handle: this.state.handle,
     };
     this.props.signupUser(newUserData, this.props.history);
-    // axios
-    //   .post("/signup", newUserData)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     localStorage.setItem("FB_token", `Bearer ${res.data.token}`);
-    //     this.setState({
-    //       loading: false,
-    //     });
-    //     this.props.history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     this.setState({
-    //       errors: err.response.data,
-    //       loading: false,
-    //     });
-    //   });
   };
 
   handleChange = (event) => {

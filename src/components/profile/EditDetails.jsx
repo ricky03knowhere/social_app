@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { editUserDetails } from "../redux/actions/userActions";
+import { editUserDetails } from "../../redux/actions/userActions";
 
-import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -15,7 +14,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import EditIcon from "@material-ui/icons/Edit";
 
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 const styles = (theme) => ({
   ...theme.spread,

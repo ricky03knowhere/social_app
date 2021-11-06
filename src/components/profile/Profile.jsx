@@ -14,9 +14,9 @@ import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
-import { logoutUser, uploadImage } from "../redux/actions/userActions";
+import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 import EditDetails from "./EditDetails";
 import { connect } from "react-redux";
 import dayjs from "dayjs";

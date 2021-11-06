@@ -9,7 +9,7 @@ import store from "./redux/store";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/layouts/Navbar";
 import themeObject from "./utils/theme";
 import AuthRoute from "./utils/AuthRoute";
 

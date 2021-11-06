@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -10,12 +10,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 import { connect } from "react-redux";
-import { deleteScream } from "../redux/actions/dataActions";
+import { deleteScream } from "../../redux/actions/dataActions";
 
 const styles = {
   deleteButton: {
     position: "absolute",
     left: "100%",
+    backgroundColor: "#f0f",
     top: "20%",
   },
 };

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import PostScream from "./PostScream";
+import PostScream from "../scream/PostScream";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
 
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 class Navbar extends Component {
   render() {
     const { authenticated } = this.props;

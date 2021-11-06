@@ -4,15 +4,18 @@ import {
   LIKE_SCREAM,
   UNLIKE_SCREAM,
   DELETE_SCREAM,
+  SET_SCREAM,
   LOADING_UI,
+  STOP_LOADING_UI,
   POST_SCREAM,
   SET_ERRORS,
   CLEAR_ERRORS,
+  SUBMIT_COMMENT,
 } from "../types";
 
 import axios from "axios";
 
-export const getScream = () => (dispatch) => {
+export const getScreams = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get("/screams")
@@ -24,6 +27,20 @@ export const getScream = () => (dispatch) => {
     });
 };
 
+export const getScream = (screamId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .get(`/scream/${screamId}`)
+    .then((res) => {
+      dispatch({
+        type: SET_SCREAM,
+        payload: res.data,
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch((err) => console.error(err));
+};
+
 export const postScream = (newScream) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
@@ -33,7 +50,7 @@ export const postScream = (newScream) => (dispatch) => {
         type: POST_SCREAM,
         payload: res.data,
       });
-      dispatch({ type: CLEAR_ERRORS });
+      dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch({ type: SET_ERRORS, payload: err.response.data });
@@ -64,6 +81,24 @@ export const unlikeScream = (screamId) => (dispatch) => {
     .catch((err) => console.error(err));
 };
 
+export const submitComment = (screamId, commentData) => (dispatch) => {
+  axios
+    .post(`/scream/${screamId}/comment`, commentData)
+    .then((res) => {
+      dispatch({
+        type: SUBMIT_COMMENT,
+        payload: { screamId: screamId, comment: res.data },
+      });
+      dispatch(clearErrors());
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
 export const deleteScream = (screamId) => (dispatch) => {
   axios
     .delete(`/scream/${screamId}`)
@@ -71,4 +106,8 @@ export const deleteScream = (screamId) => (dispatch) => {
       dispatch({ type: DELETE_SCREAM, payload: screamId });
     })
     .catch((err) => console.error(err));
+};
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

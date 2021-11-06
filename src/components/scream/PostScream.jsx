@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -15,7 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { connect } from "react-redux";
-import { postScream } from "../redux/actions/dataActions";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.spread,
@@ -30,7 +30,7 @@ const styles = (theme) => ({
   closeButton: {
     position: "absolute",
     left: "91%",
-    top: "6%",
+    top: "3%",
   },
 });
 
@@ -54,7 +54,9 @@ class PostScream extends Component {
   handleOpen = () => {
     this.setState({ open: true });
   };
+  
   handleClose = () => {
+    this.props.clearErrors()
     this.setState({ open: false, errors: {} });
   };
 
@@ -115,7 +117,7 @@ class PostScream extends Component {
                 type="submit"
                 variant="contained"
                 color="primary"
-                className={classes.submitButtom}
+                className={classes.submitButton}
                 disabled={loading}
               >
                 Submit{" "}
@@ -136,6 +138,7 @@ class PostScream extends Component {
 
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
@@ -143,6 +146,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postScream })(
+export default connect(mapStateToProps, { postScream, clearErrors })(
   withStyles(styles)(PostScream)
 );

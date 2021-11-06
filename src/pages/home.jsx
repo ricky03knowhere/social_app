@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
-import axios from "axios";
 
-import Screams from "../components/Screams";
-import Profile from "../components/Profile";
+import Screams from "../components/scream/Screams";
+import Profile from "../components/profile/Profile";
 
 import { connect } from "react-redux";
-import { getScream } from "../redux/actions/dataActions";
+import { getScreams } from "../redux/actions/dataActions";
 
 class Home extends Component {
   componentDidMount() {
-    this.props.getScream();
+    this.props.getScreams();
   }
 
   render() {
@@ -35,7 +34,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  getScream: PropTypes.func.isRequired,
+  getScreams: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -43,4 +42,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getScream })(Home);
+export default connect(mapStateToProps, { getScreams })(Home);

@@ -9,6 +9,7 @@ import store from "./redux/store";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import User from "./pages/user";
 import Navbar from "./components/layouts/Navbar";
 import themeObject from "./utils/theme";
 import AuthRoute from "./utils/AuthRoute";
@@ -45,9 +46,15 @@ class App extends Component {
             <Navbar />
             <div className="container">
               <Switch>
-                <Route path="/" exact component={Home} />
-                <AuthRoute path="/login" component={Login} />
-                <AuthRoute path="/signup" component={Signup} />
+                <Route exact path="/" component={Home} />
+                <AuthRoute exact path="/login" component={Login} />
+                <AuthRoute exact path="/signup" component={Signup} />
+                <Route exact path="/users/:handle" component={User} />
+                <Route
+                  exact
+                  path="/users/:handle/scream/:screamId"
+                  component={User}
+                />
               </Switch>
             </div>
           </Router>

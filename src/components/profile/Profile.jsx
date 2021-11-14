@@ -20,53 +20,10 @@ import MyButton from "../../utils/MyButton";
 import EditDetails from "./EditDetails";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
+import ProfileSkeleton from "../../utils/ProfileSkeleton";
 
 const styles = (theme) => ({
-  paper: {
-    padding: 20,
-  },
-  profile: {
-    "& .image-wrapper": {
-      textAlign: "center",
-      position: "relative",
-      "& button": {
-        position: "absolute",
-        top: "80%",
-        left: "70%",
-      },
-    },
-    "& .profile-image": {
-      width: 150,
-      height: 150,
-      objectFit: "cover",
-      maxWidth: "100%",
-      borderRadius: "50%",
-    },
-    "& .profile-details": {
-      textAlign: "right",
-      "& span, svg": {
-        verticalAlign: "middle",
-      },
-      "& a": {
-        color: "#00bcd4",
-      },
-    },
-    "& hr": {
-      border: "none",
-      margin: "0 0 10px 0",
-    },
-    "& svg.button": {
-      "&:hover": {
-        cursor: "pointer",
-      },
-    },
-  },
-  buttons: {
-    textAlign: "center",
-    "& a": {
-      margin: "20px 10px",
-    },
-  },
+  ...theme.spread,
 });
 
 class Profile extends Component {
@@ -122,7 +79,7 @@ class Profile extends Component {
             <div className="profile-detail" justifyContent="center">
               <MuiLink
                 component={Link}
-                to={`/user/${handle}`}
+                to={`/users/${handle}`}
                 color="primary"
                 variant="h5"
               >
@@ -195,7 +152,7 @@ class Profile extends Component {
         </Paper>
       )
     ) : (
-      <p>Loading...</p>
+      <ProfileSkeleton />
     );
     return profileMarkup;
   }

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Link from "@material-ui/core/Link";
 import dayjs from "dayjs";
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
+import Link from "react-router-dom/Link";
 
 const styles = (theme) => ({
   ...theme.spread,
@@ -45,7 +45,7 @@ class Comments extends Component {
                       <Typography
                         variant="h5"
                         component={Link}
-                        to={`/user/${userHandle}`}
+                        to={`/users/${userHandle}`}
                         color="primary"
                       >
                         {userHandle}
